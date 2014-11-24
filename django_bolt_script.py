@@ -28,7 +28,8 @@ def create_project(project_name, user_name='', user_email='',
     from subprocess import call
     from zipfile import ZipFile
 
-    mkdir('./%s' % project_name)
+    if not path.exists(project_name):
+        mkdir('./%s' % project_name)
     chdir('./%s' % project_name)
 
     # Create Django project using custom template.
@@ -44,7 +45,7 @@ def create_project(project_name, user_name='', user_email='',
         call(['git', 'config',  'user.name', user_name])
         call(['git', 'config',  'user.email', user_email])
     call(['git', 'add', '-A'])
-    call(['git', 'commit', '-m', 'Init commit'])
+    call(['git', 'commit', '-m', 'Initial commit\n\nProject generated with django_bolt_script (http://github.com/ecairo/django_bolt)'])
 
     chdir('..')
 
